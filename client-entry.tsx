@@ -1,5 +1,5 @@
 import config from './package.json';
-import { EmbedYouTube, youtubePlugin } from './src/EmbedYouTube';
+import { EmbedBook, bookPlugin } from './src/EmbedBook';
 import { Options, Func, ViewOptions } from './types/utils';
 
 declare const growiFacade : {
@@ -23,8 +23,8 @@ const activate = (): void => {
     const options = originalCustomViewOptions ? originalCustomViewOptions(...args) : optionsGenerators.generateViewOptions(...args);
     const A = options.components.a;
     // replace
-    options.components.a = EmbedYouTube(A);
-    options.remarkPlugins.push(youtubePlugin as any);
+    options.components.a = EmbedBook(A);
+    options.remarkPlugins.push(bookPlugin as any);
     return options;
   };
 
@@ -33,8 +33,8 @@ const activate = (): void => {
   optionsGenerators.customGeneratePreviewOptions = (...args) => {
     const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
     const { a } = preview.components;
-    preview.components.a = EmbedYouTube(a); // Wrap the default component
-    preview.remarkPlugins.push(youtubePlugin as any);
+    preview.components.a = EmbedBook(a); // Wrap the default component
+    preview.remarkPlugins.push(bookPlugin as any);
     return preview;
   };
 };

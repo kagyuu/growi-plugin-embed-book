@@ -4,9 +4,9 @@ import { Node } from 'unist';
 import { visit } from 'unist-util-visit';
 // import innerText from 'react-innertext';
 
-import './EmbedYouTube.css';
+import './EmbedBook.css';
 
-const getYouTubeId = (href: string): string | null => {
+const getBookId = (href: string): string | null => {
   try {
     // https://www.youtube.com/watch?v=xxxxxxx
     const url = new URL(href);
@@ -37,9 +37,9 @@ const renderLink = (properties: any, children: string, text = false): JSX.Elemen
   }
 }
 
-export const EmbedYouTube = (A: React.FunctionComponent<any>): React.FunctionComponent<any> => {
+export const EmbedBook = (A: React.FunctionComponent<any>): React.FunctionComponent<any> => {
   return ({ children, href, ...props }) => {
-    const videoId = getYouTubeId(href);
+    const videoId = getBookId(href);
     if (!videoId) {
       // check the URL domain is current domain
       try {
@@ -98,7 +98,7 @@ interface GrowiNode extends Node {
   url?: string;
 }
 
-export const youtubePlugin: Plugin = () => {
+export const bookPlugin: Plugin = () => {
   return (tree: Node) => {
     visit(tree, 'leafDirective', (node: Node) => {
       const n = node as unknown as GrowiNode;
