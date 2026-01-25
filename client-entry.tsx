@@ -1,5 +1,5 @@
 import config from './package.json';
-import { EmbedBook, bookPlugin } from './src/EmbedBook';
+import { EmbedBook } from './src/EmbedBook';
 import { Options, Func, ViewOptions } from './types/utils';
 
 declare const growiFacade : {
@@ -24,7 +24,7 @@ const activate = (): void => {
     const A = options.components.a;
     // replace
     options.components.a = EmbedBook(A);
-    options.remarkPlugins.push(bookPlugin as any);
+    // options.remarkPlugins.push(bookPlugin as any);
     return options;
   };
 
@@ -34,7 +34,7 @@ const activate = (): void => {
     const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
     const { a } = preview.components;
     preview.components.a = EmbedBook(a); // Wrap the default component
-    preview.remarkPlugins.push(bookPlugin as any);
+    //preview.remarkPlugins.push(bookPlugin as any);
     return preview;
   };
 };
